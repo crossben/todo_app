@@ -17,7 +17,7 @@ function Draggable({ id, children }) {
     );
 }
 
-function Droppable({ id, children, onDrop }) {
+function Droppable({ id, children }) {
     const { isOver, setNodeRef } = useDroppable({
         id,
     });
@@ -49,8 +49,8 @@ function TodoList() {
             const response = await api.get("/todo/" + userId);
             setTodos(response.data);
         } catch (error) {
-            console.error("Failed to fetch todos:", error);
-            setError("Failed to fetch todos. Please try again.");
+            console.error("erreur:", error);
+            setError("echec l'ors de la recuperation.");
         } finally {
             setLoading(false);
         }
@@ -68,10 +68,9 @@ function TodoList() {
             if (response.status === 200) {
                 setTodos((prevTodos) => prevTodos.filter((todo) => todo.id !== id));
             }
-            window.location.reload();   
         } catch (error) {
-            console.error("Failed to delete todo:", error);
-            setError("Failed to delete todo. Please try again.");
+            console.error("echec l'ors de la suppression:", error);
+            setError("echec l'ors de la suppression.");
         } finally {
             setLoading(false);
         }
@@ -92,15 +91,19 @@ function TodoList() {
                 );
             }
         } catch (error) {
-            console.error("Failed to update todo:", error);
-            setError("Failed to update todo. Please try again.");
+            console.error("echec l'ors de la mise a jours:", error);
+            setError("echec l'ors de la mise a jours");
         } finally {
             setLoading(false);
         }
     };
 
+    // Filtrer les todos dont le stageG est 'completed'
+    const completedTodos = todos.filter(todo => todo.stageG === 'completed');
+
     return (
         <DndContext onDragEnd={({ over }) => over && console.log(`Dropped over ${over.id}`)}>
+            <h4>{`Tasks to do -  : ${todos.length}`}</h4>
             <Droppable id="droppable" onDrop={() => console.log('Dropped')}>
                 {todos.map((todo) => (
                     <Draggable key={todo._id} id={todo._id}>
@@ -134,6 +137,37 @@ function TodoList() {
                         </div>
                     </Draggable>
                 ))}
+            </Droppable>
+            <h4 style={{ marginTop: '20px' }}>done</h4>
+            <Droppable id="completed-droppable">
+                {completedTodos.length === 0 ? (
+                    <p>Aucune tâche complétée</p>
+                ) : (
+                    completedTodos.map((todo) => (
+                        <Draggable key={todo._id} id={todo._id}>
+                            <div className="d-flex align-items-center justify-content-between mb-2" style={{ color: "#9E78CF" }}>
+                                <div style={{
+                                    border: "1px solid #15101C",
+                                    padding: "15px",
+                                    borderRadius: "4px",
+                                    background: "#1E1237",
+                                    display: "flex",
+                                    width: "100%",
+                                    maxWidth: "600px",
+                                    overflow: "hidden",
+                                    textOverflow: "ellipsis",
+                                    whiteSpace: "nowrap"
+                                }}>
+                                    <h5 className="mb-0" style={{ marginRight: "auto", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
+                                        <s className="text-success">
+                                            {todo.title}
+                                        </s>
+                                    </h5>
+                                </div>
+                            </div>
+                        </Draggable>
+                    ))
+                )}
             </Droppable>
         </DndContext>
     );
