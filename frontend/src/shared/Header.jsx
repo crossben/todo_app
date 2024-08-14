@@ -1,19 +1,15 @@
-import React from 'react';
-
 function Header() {
 
-  // Définir isAuthenticated comme une fonction normale
   const isAuthenticated = () => {
     return localStorage.getItem('tokens') !== null;
   };
 
-  // Appeler isAuthenticated pour obtenir la valeur boolean
   const authenticated = isAuthenticated();
 
   return (
     <nav className="navbar navbar-expand-lg bg-body-tertiary">
       <div className="container-fluid">
-        <a className="navbar-brand" href="#">Navbar</a>
+        <a className="navbar-brand" href="#">Ben Hattab 😎</a>
         <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
           <span className="navbar-toggler-icon"></span>
         </button>
@@ -34,7 +30,7 @@ function Header() {
               ) : (
                 <button className="btn btn-outline-danger" onClick={() => {
                   localStorage.removeItem('tokens');
-                  window.location.reload(); // Optionally reload the page to reflect the logout
+                  window.location.reload();
                 }}>Logout</button>
               )}
           </ul>

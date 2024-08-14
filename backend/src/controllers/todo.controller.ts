@@ -2,19 +2,15 @@ import { Request, Response } from "express";
 import * as TodoServices from "../services/todo.service";
 
 export const createTodo = async (req: Request & { user?: { id: string } }, res: Response) => {
-    // Typiquement, req.user devrait être défini à ce point
-    const userId = req.user?.id; // Assure-toi que req.user est bien défini
+    const userId = req.user?.id;
 
     if (!userId) {
         return res.status(400).json({ message: 'Utilisateur non authentifié' });
     }
-
-    // Assure-toi que req.body contient les données nécessaires pour créer une tâche
     const { title } = req.body;
 
     try {
-        // Implémente la logique pour créer une tâche en utilisant userId et taskData
-        const newTodo = await TodoServices.createTodo(title, userId) /* logique pour créer une tâche */
+        const newTodo = await TodoServices.createTodo(title, userId)
         res.status(201).json(newTodo);
     } catch (error) {
         res.status(500).json({ message: 'Erreur lors de la création de la tâche' });

@@ -32,7 +32,7 @@ export default function IndexPage() {
 
     return (
         <div className="d-flex justify-content-center align-items-center vh-100">
-            <div className="card p-4" style={{ width: "24rem", background: "#38265A" }}>
+            <div className="card p-4" style={{ width: "24rem", background : "#0D0714" }}>
                 <div className="card-body">
                     {/* <h5 className="card-title text-center mb-4">{error && <span style={{ color: "red" }}>{error}</span>}</h5> */}
                     <form onSubmit={handleAddTodo} className="d-flex">

@@ -1,4 +1,3 @@
-
 function Footer() {
     return (
         <div>
@@ -9,7 +8,7 @@ function Footer() {
                             <a href="#" className="text-decoration-none">About Us</a>
                         </li>
                         <li className="list-inline-item">
-                            <a href="#" className="text-decoration-none">Contact</a>
+                            <a href="mailto:benhattab227@gmail.com" className="text-decoration-none">Contact</a>
                         </li>
                         <li className="list-inline-item">
                             <a href="#" className="text-decoration-none">Privacy Policy</a>

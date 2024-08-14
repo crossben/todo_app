@@ -6,6 +6,4 @@ const userrouter = Router();
 userrouter.post('/register', userController.register);
 userrouter.post('/login', userController.login);
 
-//userrouter.post('/users', userController.logout);
-
 export default userrouter;

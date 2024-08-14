@@ -98,12 +98,11 @@ function TodoList() {
         }
     };
 
-    // Filtrer les todos dont le stageG est 'completed'
     const completedTodos = todos.filter(todo => todo.stageG === 'completed');
 
     return (
         <DndContext onDragEnd={({ over }) => over && console.log(`Dropped over ${over.id}`)}>
-            <h4>{`Tasks to do -  : ${todos.length}`}</h4>
+            <h4 className="text-white fs-6">{`Tasks to do - ${todos.length}`}</h4>
             <Droppable id="droppable" onDrop={() => console.log('Dropped')}>
                 {todos.map((todo) => (
                     <Draggable key={todo._id} id={todo._id}>
@@ -138,7 +137,7 @@ function TodoList() {
                     </Draggable>
                 ))}
             </Droppable>
-            <h4 style={{ marginTop: '20px' }}>done</h4>
+            <h4 style={{ marginTop: '20px' }} className="text-white fs-6">done - {completedTodos.length}</h4>
             <Droppable id="completed-droppable">
                 {completedTodos.length === 0 ? (
                     <p>Aucune tâche complétée</p>
