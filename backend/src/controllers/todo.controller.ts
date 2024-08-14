@@ -55,3 +55,24 @@ export const getAllTodos = async (req: Request, res: Response) => {
         res.status(500).json({ message: error.message });
     }
 };
+
+export const updateTodo = async (req: Request, res: Response) => {
+    try {
+        const { id } = req.params;
+        const { stateG } = req.body;
+        const updatedTodo = await TodoServices.updateTodoById(id, stateG);
+        res.status(200).json(updatedTodo);
+    } catch (error: any) {
+        res.status(500).json({ message: error.message });
+    }
+};
+
+export const deleteTodo = async (req: Request, res: Response) => {
+    try {
+        const { id } = req.params;
+        await TodoServices.deleteTodoById(id);
+        res.status(204).end();
+    } catch (error: any) {
+        res.status(500).json({ message: error.message });
+    }
+};

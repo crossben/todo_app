@@ -9,7 +9,7 @@ const todoSchema = new mongoose.Schema({
     stateG: {
         type: String,
         enum: ["pending", "completed"],
-        default: "completed"
+        default: "pending"
     },
     userId: {
         type: mongoose.Schema.Types.ObjectId,

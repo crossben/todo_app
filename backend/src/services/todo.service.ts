@@ -61,9 +61,9 @@ export const findTodoById = async (id: string) => {
     }
 };
 
-export const updateTodoById = async (id: string, todoData: Partial<typeof Todo>) => {
+export const updateTodoById = async (id: string, stateG: string) => {
     try {
-        const updatedTodo = await Todo.findByIdAndUpdate(id, todoData, { new: true });
+        const updatedTodo = await Todo.findByIdAndUpdate(id, {stateG : stateG}, { new: true });
         if (!updatedTodo) {
             throw new Error("Todo not found.");
         }
